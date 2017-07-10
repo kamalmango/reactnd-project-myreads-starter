@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../../atoms/Header'
+import AddButton from '../../atoms/AddButton'
 import './style.css'
 
 class Home extends Component {
@@ -7,6 +8,7 @@ class Home extends Component {
     return (
       <div className="list-books">
         <Header />
+        <AddButton />
       </div>
     )
   }
