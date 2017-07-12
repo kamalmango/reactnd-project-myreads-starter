@@ -7,7 +7,7 @@ import './style.css'
 class Home extends Component {
 
   render() {
-    const { books } = this.props
+    const { books, updateBookshelf } = this.props
     const currentlyReading = books.filter(book => book.shelf === 'currentlyReading')
     const wantToRead = books.filter(book => book.shelf === 'wantToRead')
     const read = books.filter(book => book.shelf === 'read')
@@ -17,9 +17,9 @@ class Home extends Component {
         <Header />
           <div className='list-books-content'>
             <div>
-              <Bookshelf title='Currently Reading' books={currentlyReading} />
-              <Bookshelf title='Want to Read' books={wantToRead} />
-              <Bookshelf title='Read' books={read} />
+              <Bookshelf title='Currently Reading' books={currentlyReading} updateBookshelf={updateBookshelf} />
+              <Bookshelf title='Want to Read' books={wantToRead} updateBookshelf={updateBookshelf} />
+              <Bookshelf title='Read' books={read} updateBookshelf={updateBookshelf} />
             </div>
           </div>
         <AddButton />
