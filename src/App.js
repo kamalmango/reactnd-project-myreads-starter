@@ -7,18 +7,27 @@ import './App.css'
 
 class BooksApp extends React.Component {
 	state = {
-		books: []
+    books: []
 	}
 
 	componentDidMount() {
 		BooksAPI.getAll().then(books => {
-			this.setState({ books })
+      this.setState({ books })
 		})
 	}
 
-	updateBookshelf = (book, shelf) => {
-		BooksAPI.update(book, shelf).then(res => {
-			console.log('update!!!!! ', res)
+	updateBookshelf = (bookId, shelf) => {
+    this.setState(state => {
+      state.books.forEach(book => {
+        if (book.id === bookId) {
+          book.shelf = shelf
+        }
+      })
+    })
+
+    const bookObj = {id: bookId}
+		BooksAPI.update(bookObj, shelf).then(books => {
+			console.log('update!!!!! ', books)
 		})
 	}
 

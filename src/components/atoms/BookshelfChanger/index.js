@@ -3,10 +3,8 @@ import './style.css'
 
 class BookshelfChanger extends Component {
 	handleChange = (e) => {
-		console.log('hellooooo')
 		if (this.props.updateBookshelf) {
-			//this.props.updateBookshelf(e.target.value, )
-			console.log('eeeeee ', e.target.value)
+			this.props.updateBookshelf(this.props.id, e.target.value)
 		}
 	}
 
