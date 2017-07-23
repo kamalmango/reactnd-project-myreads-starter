@@ -5,7 +5,6 @@ import './style.css'
 class Bookshelf extends Component {
   render() {
   	const { books, updateBookshelf } = this.props
-    console.log('bookshelf books ', books)
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.title}</h2>
@@ -18,6 +17,7 @@ class Bookshelf extends Component {
           	  		image={book.imageLinks.thumbnail} 
           	  		updateBookshelf={updateBookshelf} 
                   id={book.id}
+                  shelf={book.shelf}
           	  	/>
           		</li>
           	))}

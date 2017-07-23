@@ -26,12 +26,11 @@ class BooksApp extends React.Component {
     })
 
     const bookObj = {id: bookId}
-		BooksAPI.update(bookObj, shelf).then(books => {
-			console.log('update!!!!! ', books)
-		})
+		BooksAPI.update(bookObj, shelf)
 	}
 
   render() {
+    console.log('state ', this.state)
     return (
       <div className='app'>
         <Route exact path='/' render={() => (
