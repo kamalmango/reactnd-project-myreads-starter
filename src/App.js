@@ -7,7 +7,8 @@ import './App.css'
 
 class BooksApp extends React.Component {
 	state = {
-    books: []
+    books: [],
+    searchBooks: []
 	}
 
 	componentDidMount() {
@@ -23,11 +24,37 @@ class BooksApp extends React.Component {
           book.shelf = shelf
         }
       })
+
+      state.searchBooks.forEach(searchBook => {
+        if (searchBook.id === bookId) {
+          searchBook.shelf = shelf
+          state.books.push(searchBook)
+        }
+      })
     })
 
     const bookObj = {id: bookId}
 		BooksAPI.update(bookObj, shelf)
 	}
+
+  search = (query) => {
+    BooksAPI.search(query, 20).then(searchBooks => {
+      console.log('searchbooks ', searchBooks) 
+      if (typeof searchBooks === 'object') {
+        this.setState({ searchBooks: [] })
+      }    
+      if (searchBooks && Array.isArray(searchBooks)) { 
+        searchBooks.forEach(searchBook => {
+          this.state.books.forEach(book => {
+            if (searchBook.id === book.id) {
+              searchBook.shelf = book.shelf
+            }
+          })
+        })
+        this.setState({ searchBooks })
+      }
+    })
+  }
 
   render() {
     console.log('state ', this.state)
@@ -39,7 +66,13 @@ class BooksApp extends React.Component {
         		books={this.state.books}
         	/>
         )} />
-        <Route exact path='/search' component={Search} />
+        <Route exact path='/search' render={() => (
+          <Search 
+            updateBookshelf={this.updateBookshelf}
+            search={this.search}
+            searchBooks={this.state.searchBooks}
+          />
+        )} />
       </div>
     )
   }

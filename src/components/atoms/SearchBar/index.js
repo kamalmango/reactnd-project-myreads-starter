@@ -8,7 +8,11 @@ class SearchBar extends Component {
       <div className="search-books-bar">
         <Link to='/' className="close-search">Close</Link>
         <div className="search-books-input-wrapper">
-          <input type="text" placeholder="Search by title or author"/>
+          <input 
+            type="text" 
+            placeholder="Search by title or author"
+            onChange={(event) => this.props.search(event.target.value)}
+          />
         </div>
       </div>
     )
