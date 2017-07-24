@@ -1,21 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import SearchBar from '../../atoms/SearchBar'
 import ListBooks from '../../molecules/ListBooks'
 import './style.css'
 
-class Search extends Component {
+const Search = props => (
+  <div className="search-books">
+    <SearchBar search={props.search} />
+    <div className="search-books-results">
+      <ListBooks books={props.searchBooks} updateBookshelf={props.updateBookshelf} />
+    </div>
+  </div>
+)
 
-  render() {
-    const { updateBookshelf, search, searchBooks } = this.props
-    return (
-      <div className="search-books">
-        <SearchBar search={search} />
-        <div className="search-books-results">
-          <ListBooks books={searchBooks} updateBookshelf={updateBookshelf} />
-        </div>
-      </div>
-    )
-  }
-}
 
 export default Search

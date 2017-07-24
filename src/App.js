@@ -38,26 +38,29 @@ class BooksApp extends React.Component {
 	}
 
   search = (query) => {
-    BooksAPI.search(query, 20).then(searchBooks => {
-      console.log('searchbooks ', searchBooks) 
-      if (typeof searchBooks === 'object') {
-        this.setState({ searchBooks: [] })
-      }    
-      if (searchBooks && Array.isArray(searchBooks)) { 
-        searchBooks.forEach(searchBook => {
-          this.state.books.forEach(book => {
-            if (searchBook.id === book.id) {
-              searchBook.shelf = book.shelf
-            }
+    if (query.length) {    
+      BooksAPI.search(query, 20).then(searchBooks => {
+        console.log('searchbooks ', searchBooks) 
+        if (typeof searchBooks === 'object') {
+          this.setState({ searchBooks: [] })
+        }    
+        if (searchBooks && Array.isArray(searchBooks)) { 
+          searchBooks.forEach(searchBook => {
+            this.state.books.forEach(book => {
+              if (searchBook.id === book.id) {
+                searchBook.shelf = book.shelf
+              }
+            })
           })
-        })
-        this.setState({ searchBooks })
-      }
-    })
+          this.setState({ searchBooks })
+        }
+      })
+    } else {
+      this.setState({ searchBooks: [] })
+    }
   }
 
   render() {
-    console.log('state ', this.state)
     return (
       <div className='app'>
         <Route exact path='/' render={() => (
