@@ -20,7 +20,7 @@ const Home = props => {
             <Bookshelf title='Read' books={read} updateBookshelf={updateBookshelf} />
           </div>
         </div>
-      <AddButton />
+      <AddButton clearSearch={props.clearSearch} />
     </div>
   )
 }

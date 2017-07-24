@@ -37,12 +37,15 @@ class BooksApp extends React.Component {
 		BooksAPI.update(bookObj, shelf)
 	}
 
+  clearSearch = () => {
+    this.setState({ searchBooks: [] })
+  }
+
   search = (query) => {
     if (query.length) {    
       BooksAPI.search(query, 20).then(searchBooks => {
-        console.log('searchbooks ', searchBooks) 
         if (typeof searchBooks === 'object') {
-          this.setState({ searchBooks: [] })
+          this.clearSearch()
         }    
         if (searchBooks && Array.isArray(searchBooks)) { 
           searchBooks.forEach(searchBook => {
@@ -56,7 +59,7 @@ class BooksApp extends React.Component {
         }
       })
     } else {
-      this.setState({ searchBooks: [] })
+      this.clearSearch()
     }
   }
 
@@ -66,6 +69,7 @@ class BooksApp extends React.Component {
         <Route exact path='/' render={() => (
         	<Home 
         		updateBookshelf={this.updateBookshelf}
+            clearSearch={this.clearSearch}
         		books={this.state.books}
         	/>
         )} />

@@ -9,7 +9,7 @@ const ListBooks = props => (
         <Book 
           title={book.title} 
           author={book.authors} 
-          image={book.imageLinks.thumbnail} 
+          image={book.imageLinks && book.imageLinks.thumbnail} 
           updateBookshelf={props.updateBookshelf} 
           id={book.id}
           shelf={book.shelf}
