@@ -7,12 +7,8 @@ const ListBooks = props => (
     {props.books.map(book => (
       <li key={book.id}>
         <Book 
-          title={book.title} 
-          author={book.authors} 
-          image={book.imageLinks && book.imageLinks.thumbnail} 
+          book={book}
           updateBookshelf={props.updateBookshelf} 
-          id={book.id}
-          shelf={book.shelf}
         />
       </li>
     ))}

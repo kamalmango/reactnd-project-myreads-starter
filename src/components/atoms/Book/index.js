@@ -5,15 +5,12 @@ import './style.css'
 const Book = props => (
 	<div className="book">
     <div className="book-top">
-      <div className="book-cover" style={{ width: 128, height: 174, backgroundImage: `url("${props.image}")` }}></div>
-      <BookshelfChanger updateBookshelf={props.updateBookshelf} id={props.id} shelf={props.shelf} />
+      <div className="book-cover" style={{ width: 128, height: 174, backgroundImage: `url("${props.book.imageLinks && props.book.imageLinks.thumbnail}")` }}></div>
+      <BookshelfChanger updateBookshelf={props.updateBookshelf} id={props.book.id} shelf={props.book.shelf} />
     </div>
-    <div className="book-title">{props.title}</div>
-    <div className="book-authors">{props.author}</div>
+    <div className="book-title">{props.book.title}</div>
+    <div className="book-authors">{props.book.author}</div>
 	</div>
 )
 
 export default Book
-
-
-
