@@ -17,25 +17,13 @@ class BooksApp extends React.Component {
 		})
 	}
 
-	updateBookshelf = (bookId, shelf) => {
-    this.setState(state => {
-      state.books.forEach(book => {
-        if (book.id === bookId) {
-          book.shelf = shelf
-        }
-      })
-
-      state.searchBooks.forEach(searchBook => {
-        if (searchBook.id === bookId) {
-          searchBook.shelf = shelf
-          state.books.push(searchBook)
-        }
-      })
-
+	updateBookshelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf
+      this.setState(state => ({
+        books: state.books.filter(item => item.id !== book.id).concat([book])
+      }))
     })
-
-    const bookObj = {id: bookId}
-		BooksAPI.update(bookObj, shelf)
 	}
 
   clearSearch = () => {
